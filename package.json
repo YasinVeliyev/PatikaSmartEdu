@@ -1,0 +1,29 @@
+{
+  "name": "smartedu",
+  "version": "1.0.0",
+  "description": "\"# PatikaSmartEdu\"",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YasinVeliyev/PatikaSmartEdu.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YasinVeliyev/PatikaSmartEdu/issues"
+  },
+  "homepage": "https://github.com/YasinVeliyev/PatikaSmartEdu#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
