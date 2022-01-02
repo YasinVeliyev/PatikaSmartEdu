@@ -4,9 +4,10 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: [ main ]
+    push:
+        branches: [main]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    - run: echo 'Hello World'
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo 'Hello World'
