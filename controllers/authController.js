@@ -13,7 +13,12 @@ exports.loginUser = async (req, res, next) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
     if (user && (await user.checkPassword(password, user.password))) {
-        return res.status(200).json({ status: "success" });
+        req.session.userId = user._id;
+        return res.redirect("/");
     }
     res.redirect("/login");
+};
+
+exports.logoutUser = async (req, res, next) => {
+    req.session.destroy(() => res.redirect("/login"));
 };

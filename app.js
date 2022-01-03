@@ -1,17 +1,38 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 
 const pageRouter = require("./routes/pageRouter");
 const courseRouter = require("./routes/courseRouter");
 const authRouter = require("./routes/authRouter");
 
 const app = express();
+
 app.use(morgan("Method::method, Url::url, Status Code::status, Response Time::response-time"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(
+    session({
+        secret: "secret_key",
+        resave: false,
+        saveUninitialized: true,
+        store: MongoStore.create({ mongoUrl: "mongodb://localhost/smartedu" }),
+    }),
+);
+
 app.set("view engine", "ejs");
+
+app.use((req, res, next) => {
+    if (req.session.userId) {
+        res.locals.userIn = req.session.userId;
+    } else {
+        res.locals.userIn = null;
+    }
+    next();
+});
 
 app.use(pageRouter);
 app.use("/courses", courseRouter);
