@@ -2443,7 +2443,7 @@ select.mobile-device {
 }
 
 #contact {
-    background: url(images/bg.png) no-repeat center center #fff;
+    background: url(/images/bg.png) no-repeat center center #fff;
 }
 
 .map-box{
@@ -2483,7 +2483,7 @@ select.mobile-device {
 .footer {
     padding: 90px 0 80px !important;
     color: #cccccc;
-	background:#4c5a7d url('/images/world-map.png') no-repeat center; 
+	background:#4c5a7d url(/images/world-map.png) no-repeat center; 
 }
 
 .footer .widget-title {
@@ -2845,7 +2845,7 @@ body.host_version .first-section .effect-1.slide-btn::after{
 /**-------------- inner Page css ---------------**/
 
 .all-title-box{
-	background: url(images/banner.jpg)no-repeat;
+	background: url(/images/banner.jpg)no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -3751,7 +3751,7 @@ a.link-style3 {
     text-indent: -5555em;
     line-height: 100;
     overflow: hidden;
-    background: #eea412 url(images/search-icon.png) no-repeat center 14px;
+    background: #eea412 url(/images/search-icon.png) no-repeat center 14px;
     border: 0;
     transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;

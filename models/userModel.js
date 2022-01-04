@@ -7,6 +7,11 @@ const userSchema = new Schema({
     firstname: { type: String, required: true },
     lastname: { type: String, required: true },
     password: { type: String, required: true },
+    role: {
+        type: String,
+        enum: ["Student", "Teacher", "Admin"],
+        default: "Student",
+    },
 });
 
 userSchema.pre("save", function (next) {

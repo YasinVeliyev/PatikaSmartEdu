@@ -8,12 +8,5 @@ let courseSchema = new Schema({
     createdAt: { type: Date, default: Date.now },
 });
 
-courseSchema.pre("validate", function (next) {
-    this.slug = slugify(this._id.toString(), {
-        lower: true,
-        strict: true,
-    });
-    next();
-});
 const Course = model("Course", courseSchema);
 module.exports = Course;

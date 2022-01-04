@@ -1,14 +1,15 @@
 const Course = require("../models/courseModel");
 
 exports.createCourse = async (req, res, next) => {
-    const { name, description } = req.body;
+    const { name, description, category } = req.body;
     try {
-        const course = await Course.create({ name, description });
+        const course = await Course.create({ name, description, category });
         res.status(201).json({
             status: "success",
             data: { course },
         });
     } catch (error) {
+        console.log(error);
         res.status(400).json({
             status: "fail",
             error,

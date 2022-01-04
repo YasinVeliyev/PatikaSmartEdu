@@ -22,3 +22,7 @@ exports.loginUser = async (req, res, next) => {
 exports.logoutUser = async (req, res, next) => {
     req.session.destroy(() => res.redirect("/login"));
 };
+
+exports.getDashboardPage = async (req, res, next) => {
+    return res.render("dashboard", { page_name: "dashboard", user: req.user });
+};
