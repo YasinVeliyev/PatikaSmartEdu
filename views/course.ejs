@@ -12,7 +12,7 @@
                 <div class="col-lg-9 blog-post-single">
                     <div class="blog-item">
 						<div class="image-blog">
-							<img src="images/blog_single.jpg" alt="" class="img-fluid">
+							<img src="/images/blog_single.jpg" alt="" class="img-fluid">
 						</div>
 						<div class="post-content">
 							<div class="post-date">
@@ -26,11 +26,10 @@
 								<h2><a href="#" title=""><%= course.name %></a></h2>
 							</div>
 							<div class="blog-desc">
-
 								<blockquote class="default">
 									<%= course.description %>
 								</blockquote>
-
+								<a href="/courses?teacherId=<%= course.teacher?._id %> "><%= `${course.teacher?.firstname} ${course.teacher?.lastname}` %> </a>
 							</div>							
 						</div>
 					</div>
@@ -44,7 +43,7 @@
 							</p>
 						</div>
 						<div class="author-desc">
-							<img src="images/author.jpg" alt="about author">
+							<img src="/images/author.jpg" alt="about author">
 							<ul class="author-social">
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>

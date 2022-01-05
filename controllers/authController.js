@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+const Course = require("../models/courseModel");
 
 exports.createUser = async (req, res, next) => {
     const { username, email, firstname, lastname, password, confirmpassword } = req.body;
@@ -24,5 +25,10 @@ exports.logoutUser = async (req, res, next) => {
 };
 
 exports.getDashboardPage = async (req, res, next) => {
-    return res.render("dashboard", { page_name: "dashboard", user: req.user });
+    try {
+        const courses = await Course.find({ teacher: req.user._id });
+        return res.render("dashboard", { page_name: "dashboard", user: req.user, courses });
+    } catch (error) {
+        res.json({ status: fail });
+    }
 };
