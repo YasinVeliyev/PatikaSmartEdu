@@ -3489,12 +3489,12 @@ span.m_1 {
 
 
 .post-content .post-date{
-	display: inline-block;
+	display: flex;
 	float: right;
 }
-.post-content .post-date span{
+/* .post-content .post-date span{
 	float: left;
-}
+} */
 .post-content .post-date .day{
 	background: #eea412;
 	color: #FFFFFF;

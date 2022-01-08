@@ -12,10 +12,16 @@ const userSchema = new Schema({
         enum: ["Student", "Teacher", "Admin"],
         default: "Student",
     },
+    courses: [{ type: Schema.Types.ObjectId, ref: "Course" }],
 });
 
 userSchema.pre("save", function (next) {
     this.password = bcrypt.hashSync(this.password, 12);
+    next();
+});
+
+userSchema.pre(/^find/, function (next) {
+    this.find({}).populate("courses");
     next();
 });
 

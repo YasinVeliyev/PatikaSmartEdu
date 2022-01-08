@@ -7,6 +7,7 @@ const MongoStore = require("connect-mongo");
 const pageRouter = require("./routes/pageRouter");
 const courseRouter = require("./routes/courseRouter");
 const authRouter = require("./routes/authRouter");
+const middleware = require("./utils/middleware");
 
 const app = express();
 
@@ -25,19 +26,11 @@ app.use(
 
 app.set("view engine", "ejs");
 
-app.use((req, res, next) => {
-    if (req.session.userId) {
-        res.locals.userIn = req.session.userId;
-    } else {
-        res.locals.userIn = null;
-    }
-    next();
-});
+app.use(middleware.isLoggedIn);
 
 app.use(pageRouter);
 app.use("/courses", courseRouter);
 app.use("/users", authRouter);
-
 mongoose
     .connect("mongodb://localhost:27017/smartedu")
     .then(

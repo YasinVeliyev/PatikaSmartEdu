@@ -1,16 +1,15 @@
 exports.getIndexPage = (req, res, next) => {
-    console.log(req.session.userId);
-    res.render("index", { page_name: "/" });
+    res.render("index", { page_name: "/", user: req.user });
 };
 
 exports.getAboutPage = (req, res, next) => {
-    res.render("about", { page_name: "about" });
+    res.render("about", { page_name: "about", user: req.user });
 };
 
 exports.getRegisterPage = (req, res, next) => {
-    res.render("register", { page_name: "register" });
+    res.render("register", { page_name: "register", user: req.user });
 };
 
 exports.getLoginPage = (req, res, next) => {
-    res.render("login", { page_name: "login" });
+    res.render("login", { page_name: "login", user: req.user });
 };

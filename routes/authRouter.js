@@ -7,5 +7,7 @@ router.post("/signup", authController.createUser);
 router.post("/signin", authController.loginUser);
 router.get("/logout", middleware.loginRequired, authController.logoutUser);
 router.get("/dashboard", middleware.loginRequired, authController.getDashboardPage);
+router.get("/mycourses", middleware.loginRequired, authController.getMyAllEnrolledCourses);
+router.get("/myteaching", middleware.loginRequired, authController.getMyAllTeaching);
 
 module.exports = router;

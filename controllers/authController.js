@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const Course = require("../models/courseModel");
+const mongoose = require("mongoose");
 
 exports.createUser = async (req, res, next) => {
     const { username, email, firstname, lastname, password, confirmpassword } = req.body;
@@ -26,9 +27,34 @@ exports.logoutUser = async (req, res, next) => {
 
 exports.getDashboardPage = async (req, res, next) => {
     try {
-        const courses = await Course.find({ teacher: req.user._id });
-        return res.render("dashboard", { page_name: "dashboard", user: req.user, courses });
+        const courses = await User.findById(req.user._id);
+        return res.render("dashboard", { page_name: "dashboard", user: req.user, courses: courses.courses });
     } catch (error) {
         res.json({ status: fail });
+    }
+};
+
+exports.getMyAllEnrolledCourses = async (req, res, next) => {
+    try {
+        let user = await User.findById(req.user._id);
+        res.render("courses", { courses: user.courses || [], page_name: "mycourses", user: req.user });
+    } catch (error) {
+        res.status(400).json({
+            status: "fail",
+            error,
+        });
+    }
+};
+
+exports.getMyAllTeaching = async (req, res, next) => {
+    try {
+        let courses = await Course.find({ teacher: req.user._id });
+        res.render("courses", { courses, page_name: "myteaching", user: req.user });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            status: "fail",
+            error,
+        });
     }
 };

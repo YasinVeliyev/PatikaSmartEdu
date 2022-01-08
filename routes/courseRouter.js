@@ -9,7 +9,8 @@ router.post(
     middleware.checkUserRole(["Teacher", "Admin"]),
     courseController.createCourse,
 );
-router.get("/", courseController.getAllCourse);
-router.get("/:courseId", courseController.getCourse);
+router.get("/", middleware.isLoggedIn, courseController.getAllCourse);
+router.get("/:courseId", middleware.isLoggedIn, courseController.getCourse);
+router.post("/enroll", middleware.loginRequired, courseController.enrollCourse);
 
 module.exports = router;

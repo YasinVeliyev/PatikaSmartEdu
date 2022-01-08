@@ -11,7 +11,7 @@ let courseSchema = new Schema({
 });
 
 courseSchema.pre(/^find/, function (next) {
-    this.populate("teacher");
+    this.find().populate("teacher");
     next();
 });
 

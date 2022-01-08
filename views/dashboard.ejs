@@ -1,4 +1,5 @@
-<%- include("partials/_header") -%> <% if(user) { %> <% if(user.role==='Student' ) { %>
+<%- include("partials/_header") -%> 
+<% if(user) { %> <% if(user.role==='Student' ) { %>
 <div class="all-title-box">
     <div class="container text-center">
         <h1><%= user.firstname %><span class="m_1">Student</span></h1>
@@ -29,29 +30,7 @@
             <!-- end col -->
         </div>
         <!-- end row -->
-        <div class="row mt-5">
-            <div class="col-lg-6 col-md-6 col-12">
-                <div class="course-item mb-5">
-                    <div class="image-blog">
-                        <img src="/images/blog_1.jpg" alt="" class="img-fluid" />
-                    </div>
-                    <div class="course-br">
-						<% for( let course of courses ) { %>
-							<div class="course-title">
-								<h2><a href="course-single.html" title=""><%=  course.name%> </a></h2>
-							</div>
-							<div class="course-desc">
-								<p>
-									<%=  course.description%>
-								</p>
-							</div>
-						<% } %>
-                       
-                    </div>
-                </div>
-            </div>
-            <!-- end col -->
-        </div>
+        
         <!-- end row -->
     </div>
     <!-- end container -->
@@ -60,7 +39,7 @@
 <% } %> <% if(user.role==='Teacher' ||user.role==='Admin') { %>
 <div class="all-title-box">
     <div class="container text-center">
-        <h1><%= user.firstname %><span class="m_1">TEACHER</span></h1>
+        <h1><%= user.firstname %><span class="m_1">Teacher</span></h1>
     </div>
 </div>
 <div id="overviews" class="section wb">
@@ -96,29 +75,7 @@
             <!-- end col -->
         </div>
         <!-- end row -->
-        <div class="row mt-5">
-            <div class="col-lg-6 col-md-6 col-12">
-                <div class="course-item mb-5">
-                    <div class="image-blog">
-                        <img src="/images/blog_1.jpg" alt="" class="img-fluid" />
-                    </div>
-                    <div class="course-br">
-						<% for( let course of courses ) { %>
-							<div class="course-title">
-								<h2><a href="course-single.html" title=""><%=  course.name%> </a></h2>
-							</div>
-							<div class="course-desc">
-								<p>
-									<%=  course.description%>
-								</p>
-							</div>
-						<% } %>
-                       
-                    </div>
-                </div>
-            </div>
-            
-        </div>
+        
         <!-- end row -->
     </div>
     <!-- end container -->
