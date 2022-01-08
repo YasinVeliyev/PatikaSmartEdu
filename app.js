@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+require("dotenv").config();
 
 const pageRouter = require("./routes/pageRouter");
 const courseRouter = require("./routes/courseRouter");

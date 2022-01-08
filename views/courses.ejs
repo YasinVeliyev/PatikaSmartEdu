@@ -117,6 +117,25 @@
 			<% if (locals.userIn && user && (user.role==='Teacher' ||user.role==='Admin') && page_name=="myteaching") { %>
 				<h1 class='text-center' >My Teachings</h1>
 			<% } %>
+			<div class="row">
+				<div class="col-lg-6 col-6 right-single">
+					<div class="widget-search">
+						<div class="site-search-area">
+							<form method="GET" id="site-searchform" action="/courses">
+								<div>
+									<input class="input-text form-control" name="search" id="search-k" placeholder="Search..." type="text">
+									<button id="searchsubmit" value="Search" type="submit"></button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-6 right-single">
+					<div class="widget-categories">
+						<h3 class="widget-title">Categories</h3>
+					</div>
+				</div>
+			</div>
 			
             <div class="row"> 
 			<% for (let course of courses) { %>
@@ -132,6 +151,12 @@
 							<div class="course-desc">
 								<p><%= course.description.substring(0, 100) + "..." %></p>
 							</div>
+							
+						</div>
+						<div class="course-meta-bot">
+							<ul>
+								<li><i class="fa fa-user" aria-hidden="true"></i><%= `${course.teacher?.firstname}  ${course.teacher?.lastname}` %></li>
+							</ul>
 						</div>
 					</div>
                 </div><!-- end col -->
@@ -140,21 +165,7 @@
             </div><!-- end row -->
 					
                 </div><!-- end col -->
-				<div class="col-lg-3 col-12 right-single">
-					<div class="widget-search">
-						<div class="site-search-area">
-							<form method="GET" id="site-searchform" action="/courses">
-								<div>
-									<input class="input-text form-control" name="search" id="search-k" placeholder="Search..." type="text">
-									<button id="searchsubmit" value="Search" type="submit"></button>
-								</div>
-							</form>
-						</div>
-					</div>
-					<div class="widget-categories">
-						<h3 class="widget-title">Categories</h3>
-					</div>
-				</div>
+				
             </div><!-- end row -->
         </div><!-- end container -->
     </div><!-- end section -->

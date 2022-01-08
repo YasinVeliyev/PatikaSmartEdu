@@ -10,11 +10,13 @@ exports.loginRequired = async (req, res, next) => {
 
 exports.isLoggedIn = async (req, res, next) => {
     if (req.session.userId) {
-        res.locals.userIn = req.session.userId;
+        res.locals.userIn = true;
         let user = await User.findById(req.session.userId);
         if (user) {
             req.user = user;
         }
+    } else {
+        res.locals.userIn = false;
     }
     next();
 };

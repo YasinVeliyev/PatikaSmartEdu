@@ -24,10 +24,13 @@ exports.getAllCourse = async (req, res, next) => {
         let courses;
         if (req.query.teacherId) {
             courses = await Course.find({ teacher: req.query.teacherId });
+        }
+        if (req.query.search) {
+            let pattern = new RegExp(`^${req.query.search}`);
+            courses = await Course.find({ name: { $regex: pattern, $options: "si" } });
         } else {
             courses = await Course.find({});
         }
-        console.log(req.user);
         res.render("courses", { courses, page_name: "courses", user: req.user });
     } catch (error) {
         console.log(error);
