@@ -5,12 +5,12 @@ const { validationResult } = require("express-validator");
 
 exports.createUser = async (req, res, next) => {
     const { username, email, firstname, lastname, password, confirmpassword } = req.body;
-    try {
+    const errors = validationResult(req);
+    if (!errors.errors.length) {
         await User.create({ username, email, firstname, lastname, password });
         return res.redirect("/login");
-    } catch (error) {
-        const errors = validationResult(req);
-        console.log(errors);
+    } else {
+        console.log(errors.errors);
         req.flash("errors", errors.errors);
         res.status(400).redirect("/register");
     }
@@ -18,12 +18,14 @@ exports.createUser = async (req, res, next) => {
 
 exports.loginUser = async (req, res, next) => {
     const { username, password } = req.body;
-    const user = await User.findOne({ username });
-    if (user && (await user.checkPassword(password, user.password))) {
-        req.session.userId = user._id;
-        return res.redirect("/");
-    }
     const errors = validationResult(req);
+    if (!errors.errors.length) {
+        const user = await User.findOne({ username });
+        if (user && (await user.checkPassword(password, user.password))) {
+            req.session.userId = user._id;
+            return res.redirect("/");
+        }
+    }
     req.flash("errors", [...errors.errors, { param: "error", msg: "Your Username or Password is wrong" }]);
     res.status(400).redirect("/login");
 };

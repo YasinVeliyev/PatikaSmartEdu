@@ -12,28 +12,28 @@
                                 <div class="offset-1 col-lg-10 col-md-10 col-sm-10 m-2">
                                     <input type="text" name="username" id="username" class="form-control m-0"
                                         placeholder="Username" required />
-                                        <% if (locals.flashMessages.errors) { %>
+                                        <% if (locals.flashMessages?.errors) { %>
                                             <%- include("partials/_flash",{flashMessages:locals.flashMessages,param:"username"}) %> 
                                         <% } %>
                                 </div>
                                 <div class="offset-1 col-lg-10 col-md-10 col-sm-10 m-2">
                                     <input type="text" name="firstname" id="firstname" class="form-control m-0"
                                         placeholder="First name" required />
-                                        <% if (locals.flashMessages.errors) { %>
+                                        <% if (locals.flashMessages?.errors) { %>
                                             <%- include("partials/_flash",{flashMessages:locals.flashMessages,param:"firstname"}) %> 
                                         <% } %>
                                 </div>
                                 <div class="offset-1 col-lg-10 col-md-10 col-sm-10 m-2">
                                     <input type="text" name="lastname" id="lastname" class="form-control m-0"
                                         placeholder="Last name" required />
-                                        <% if (locals.flashMessages.errors) { %>
+                                        <% if (locals.flashMessages?.errors) { %>
                                             <%- include("partials/_flash",{flashMessages:locals.flashMessages,param:"lastname"}) %> 
                                         <% } %>
                                 </div>
                                 <div class="offset-1 col-lg-10 col-md-10 col-sm-10 m-2">
                                     <input type="email" name="email" id="email" class="form-control m-0"
                                         placeholder="Email" required />
-                                        <% if (locals.flashMessages.errors) { %>
+                                        <% if (locals.flashMessages?.errors) { %>
                                             <%- include("partials/_flash",{flashMessages:locals.flashMessages,param:"email"}) %> 
                                         <% } %>
                                 </div>
@@ -41,14 +41,14 @@
                                 <div class="offset-1 col-lg-10 col-md-10 col-sm-10 m-2">
                                     <input type="password" name="password" id="password" class="form-control m-0"
                                         placeholder="Password" required/>
-                                        <% if (locals.flashMessages.errors) { %>
+                                        <% if (locals.flashMessages?.errors) { %>
                                             <%- include("partials/_flash",{flashMessages:locals.flashMessages,param:"password"}) %> 
                                         <% } %>
                                 </div>
                                 <div class="offset-1 col-lg-10 col-md-10 col-sm-10 m-2">
                                     <input type="password" name="confirmpassword" id="confirmpassword"
                                         class="form-control m-0" placeholder="Confirm Password" required />
-                                        <% if (locals.flashMessages.errors) { %>
+                                        <% if (locals.flashMessages?.errors) { %>
                                             <%- include("partials/_flash",{flashMessages:locals.flashMessages,param:"confirmpassword"}) %> 
                                         <% } %>
                                 </div>
@@ -57,7 +57,7 @@
                                         <option value="Student">Student</option>
                                         <option value="Teacher">Teacher</option>
                                     </select>
-                                    <% if (locals.flashMessages.errors) { %>
+                                    <% if (locals.flashMessages?.errors) { %>
                                         <%- include("partials/_flash",{flashMessages:locals.flashMessages,param:'role'}) %> 
                                     <% } %>
                                 </div>
