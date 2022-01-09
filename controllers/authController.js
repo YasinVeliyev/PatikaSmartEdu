@@ -23,6 +23,9 @@ exports.loginUser = async (req, res, next) => {
         const user = await User.findOne({ username });
         if (user && (await user.checkPassword(password, user.password))) {
             req.session.userId = user._id;
+            if (req.query.next) {
+                return res.redirect(req.query.next);
+            }
             return res.redirect("/");
         }
     }

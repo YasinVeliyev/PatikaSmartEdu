@@ -5,6 +5,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 require("dotenv").config();
 const flash = require("connect-flash");
+const methodOverride = require("method-override");
 
 const pageRouter = require("./routes/pageRouter");
 const courseRouter = require("./routes/courseRouter");
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
     res.locals.flashMessages = req.flash();
     next();
 });
+app.use(methodOverride("_method", { methods: ["GET", "POST"] }));
 
 app.set("view engine", "ejs");
 

@@ -6,10 +6,7 @@ exports.createCourse = async (req, res, next) => {
     const { name, description, category } = req.body;
     try {
         const course = await Course.create({ name, description, category, teacher: req.user._id });
-        res.status(201).json({
-            status: "success",
-            data: { course },
-        });
+        res.redirect("/users/myteaching");
     } catch (error) {
         console.log(error);
         res.status(400).json({
@@ -44,7 +41,7 @@ exports.getAllCourse = async (req, res, next) => {
 exports.getCourse = async (req, res, next) => {
     let enrolled;
     if (req.user) {
-        enrolled = req.user.courses.filter((course) => course._id == req.params.courseId)[0];
+        enrolled = req.user.courses?.filter((course) => course._id == req.params.courseId)[0];
     }
     try {
         const course = await Course.findById(req.params.courseId);
@@ -54,6 +51,23 @@ exports.getCourse = async (req, res, next) => {
             status: "fail",
             error,
         });
+    }
+};
+
+exports.deleteCourse = async (req, res, next) => {
+    try {
+        if (req.user.role == "Admin" || req.user.courses.filter((course) => course._id == req.params.courseId)[0]) {
+            const course = await Course.findByIdAndDelete(req.params.courseId);
+            req.flash("success", `${course.name} Course has been deleted`);
+        } else {
+            console.log(req.url, req.params.courseId);
+            req.flash("error", `You dont have permission to delete  this course`);
+            return res.redirect(`/courses/${req.params.courseId}`);
+        }
+        return res.redirect(req.get("Referer"));
+    } catch (error) {
+        req.flash("error", "Something get wrong Please try again");
+        res.status(400).redirect(req.get("Referer"));
     }
 };
 

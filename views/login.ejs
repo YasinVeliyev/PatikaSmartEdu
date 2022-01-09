@@ -5,7 +5,7 @@
 
 			<div class="row">
 				<div class="col-xl-12 col-md-12 col-sm-12">
-						<% if (locals.flashMessages.errors) { %>
+						<% if (locals.flashMessages?.errors) { %>
 							<div class="alert alert-warning">
 								<%- include("partials/_flash",{flashMessages:locals.flashMessages,param:'error'}) %> 
 							</div>

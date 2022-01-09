@@ -11,6 +11,19 @@
 				<div class="row">
 					<!-- Modal Button -->
 					<div class="col-lg-12 text-center">
+						<% if (flashMessages) { %>
+							<% if (flashMessages.success) { %>
+								<div class="alert alert-success">
+									<%= flashMessages.success %>
+								</div>
+			
+							<% } else if (flashMessages.error) { %>
+								<div class="alert alert-danger">
+									<%= flashMessages.error %>
+								</div>
+							<% } %>
+			
+						<% } %>
 						<button
 							class="btn btn-lg btn-warning rounded-0 text-white"
 							href="#"
@@ -114,6 +127,7 @@
 		 <% } %> 
     <div id="overviews" class="section wb">
         <div class="container">
+			
 			<% if (locals.userIn && user && (user.role==='Teacher' ||user.role==='Admin') && page_name=="myteaching") { %>
 				<h1 class='text-center' >My Teachings</h1>
 			<% } %>
@@ -138,6 +152,20 @@
 			</div>
 			
             <div class="row"> 
+				<div class="col-lg-12 text-center">
+					<% if (flashMessages) { %>
+						<% if (flashMessages.success) { %>
+							<div class="alert alert-success">
+								<%= flashMessages.success %>
+							</div>
+		
+						<% } else if (flashMessages.error) { %>
+							<div class="alert alert-danger">
+								<%= flashMessages.error %>
+							</div>
+						<% } %>
+		
+					<% } %>
 			<% for (let course of courses) { %>
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="course-item mb-5">
@@ -151,7 +179,22 @@
 							<div class="course-desc">
 								<p><%= course.description.substring(0, 100) + "..." %></p>
 							</div>
-							
+							<% if (locals.userIn && user && (user.role==='Teacher' ||user.role==='Admin') && page_name=="myteaching") { %>
+								<div>
+									<ul style="display:flex;justify-content: space-around;list-style: none;">
+										<li><button class='btn btn-primary rounded-0 text-white'><span>Update</span></button></li>
+										<li><a class='btn btn-danger rounded-0 text-white' href="/courses/<%= course._id %>?_method=DELETE" onclick="return confirm('Are You Sure')"><span>Delete</span></a></li>
+									</ul>
+								</div>
+							<% } %>
+							<% if (locals.userIn && user && (user.role==='Admin')&& page_name=="courses") { %>
+								<div>
+									<ul style="display:flex;justify-content: space-around;list-style: none;">
+										<li><button class='btn btn-primary rounded-0 text-white'><span>Update</span></button></li>
+										<li><a class='btn btn-danger rounded-0 text-white' href="/courses/<%= course._id %>?_method=DELETE" onclick="return confirm('Are You Sure')"><span>Delete</span></a></li>
+									</ul>
+								</div>
+							<% } %>
 						</div>
 						<div class="course-meta-bot">
 							<ul>
