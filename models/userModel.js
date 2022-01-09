@@ -13,6 +13,7 @@ const userSchema = new Schema({
         default: "Student",
     },
     courses: [{ type: Schema.Types.ObjectId, ref: "Course" }],
+    teaching: [{ type: Schema.Types.ObjectId, ref: "Course" }],
 });
 
 userSchema.pre("save", function (next) {
@@ -20,10 +21,11 @@ userSchema.pre("save", function (next) {
     next();
 });
 
-userSchema.pre(/^find/, function (next) {
-    this.find({}).populate("courses");
-    next();
-});
+// userSchema.post(/^find/, function (docs) {
+//     for (let doc of docs) {
+//         doc.populate("courses");
+//     }
+// });
 
 userSchema.methods.checkPassword = async function (password, hash) {
     return await bcrypt.compare(password, hash);

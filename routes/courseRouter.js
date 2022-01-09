@@ -9,12 +9,18 @@ router.post(
     middleware.checkUserRole(["Teacher", "Admin"]),
     courseController.createCourse,
 );
-router.get("/", middleware.isLoggedIn, courseController.getAllCourse);
+router.get("/", courseController.getAllCourse);
 router
     .route("/:courseId")
-    .get(middleware.isLoggedIn, courseController.getCourse)
+    .get(courseController.getCourse)
     .delete(middleware.loginRequired, middleware.checkUserRole(["Teacher", "Admin"]), courseController.deleteCourse);
 
 router.post("/enroll", middleware.loginRequired, courseController.enrollCourse);
+router.put(
+    "/update/:courseId",
+    middleware.loginRequired,
+    middleware.checkUserRole(["Teacher", "Admin"]),
+    courseController.updateCourse,
+);
 
 module.exports = router;

@@ -4,10 +4,10 @@ const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 
 exports.createUser = async (req, res, next) => {
-    const { username, email, firstname, lastname, password, confirmpassword } = req.body;
+    const { username, email, firstname, lastname, password, confirmpassword, role } = req.body;
     const errors = validationResult(req);
     if (!errors.errors.length) {
-        await User.create({ username, email, firstname, lastname, password });
+        await User.create({ username, email, firstname, lastname, password, role });
         return res.redirect("/login");
     } else {
         console.log(errors.errors);
@@ -48,7 +48,7 @@ exports.getDashboardPage = async (req, res, next) => {
 
 exports.getMyAllEnrolledCourses = async (req, res, next) => {
     try {
-        let user = await User.findById(req.user._id);
+        let user = await User.findById(req.user._id).populate("courses");
         res.render("courses", { courses: user.courses || [], page_name: "mycourses", user: req.user });
     } catch (error) {
         res.status(400).json({

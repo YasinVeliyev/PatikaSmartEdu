@@ -14,7 +14,7 @@ const middleware = require("./utils/middleware");
 
 const app = express();
 
-app.use(morgan("Method::method, Url::url, Status Code::status, Response Time::response-time"));
+// app.use(morgan("Method::method, Url::url, Status Code::status, Response Time::response-time"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -31,11 +31,10 @@ app.use((req, res, next) => {
     res.locals.flashMessages = req.flash();
     next();
 });
+app.use(middleware.isLoggedIn);
 app.use(methodOverride("_method", { methods: ["GET", "POST"] }));
 
 app.set("view engine", "ejs");
-
-app.use(middleware.isLoggedIn);
 
 app.use(pageRouter);
 app.use("/courses", courseRouter);
