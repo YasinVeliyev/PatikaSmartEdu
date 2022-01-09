@@ -21,9 +21,14 @@ userSchema.pre("save", function (next) {
     next();
 });
 
-// userSchema.post(/^find/, function (docs) {
-//     for (let doc of docs) {
-//         doc.populate("courses");
+// userSchema.post(/^find/, async function (docs) {
+//     console.log(docs);
+//     if (Array.isArray(docs)) {
+//         for (let doc of docs) {
+//             await doc.populate("courses");
+//         }
+//     } else {
+//         await docs.populate("courses");
 //     }
 // });
 
