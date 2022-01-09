@@ -15,6 +15,11 @@
             </div><!-- end title -->
 
             <div class="row">
+				<% if (locals.flashMessages) { %>
+					<% if (locals.flashMessages.success) { %>
+						<div class="alert alert-success"><%= locals.flashMessages.success  %> </div>
+					<% } %>
+				<% } %>
                 <div class="col-xl-12 col-md-12 col-sm-12">
                     <div class="contact_form">
                         <div id="message"></div>

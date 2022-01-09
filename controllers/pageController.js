@@ -32,6 +32,7 @@ exports.sendEmail = (req, res, next) => {
         <h1>Message</h1>
         <p>${message}</p>
     `;
-    sendEmail(email, outputMessage);
+    sendEmail(req, email, outputMessage);
+    req.flash("success", "Your message has been sent");
     res.redirect("/contact");
 };

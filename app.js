@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 require("dotenv").config();
+const flash = require("connect-flash");
 
 const pageRouter = require("./routes/pageRouter");
 const courseRouter = require("./routes/courseRouter");
@@ -24,6 +25,11 @@ app.use(
         store: MongoStore.create({ mongoUrl: "mongodb://localhost/smartedu" }),
     }),
 );
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.flashMessages = req.flash();
+    next();
+});
 
 app.set("view engine", "ejs");
 

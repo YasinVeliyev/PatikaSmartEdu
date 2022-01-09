@@ -1,0 +1,16 @@
+
+
+        <% if (flashMessages.success) { %>
+            
+            <div class="alert alert-success">
+                <%= flashMessages.success %>
+            </div>
+
+        <% } else if (flashMessages.errors) { %>
+            <span style='color:red;margin:0'>
+                <%= flashMessages.errors.filter(err=>err['param']===param).map(err=>err.msg).join(",") %>
+            </span>
+
+        <% } %>
+   
+

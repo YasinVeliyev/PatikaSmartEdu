@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-exports.sendEmail = async (from, html) => {
+exports.sendEmail = async (req, from, html) => {
     let testAccount = await nodemailer.createTestAccount();
 
     let transporter = nodemailer.createTransport({
@@ -18,6 +18,7 @@ exports.sendEmail = async (from, html) => {
             html,
         });
     } catch (error) {
+        req.flash("warning", "Error");
         console.error(error);
     }
 };
