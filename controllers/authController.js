@@ -40,9 +40,18 @@ exports.logoutUser = async (req, res, next) => {
 exports.getDashboardPage = async (req, res, next) => {
     try {
         const courses = await User.findById(req.user._id);
+        if (req.user.role == "Admin") {
+            users = await User.find({});
+            return res.render("adminDashboard", {
+                page_name: "dashboard",
+                user: req.user,
+                users: users.filter((user) => user.role !== "Admin"),
+            });
+        }
         return res.render("dashboard", { page_name: "dashboard", user: req.user, courses: courses.courses });
     } catch (error) {
-        res.json({ status: fail });
+        console.log(error);
+        res.json({ status: "fail" });
     }
 };
 

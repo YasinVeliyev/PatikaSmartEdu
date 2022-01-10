@@ -66,7 +66,6 @@ exports.deleteCourse = async (req, res, next) => {
             );
             req.flash("success", `${course.name} Course has been deleted`);
         } else {
-            console.log(req.url, req.params.courseId);
             req.flash("error", `You dont have permission to delete  this course`);
             return res.redirect(`/courses/${req.params.courseId}`);
         }

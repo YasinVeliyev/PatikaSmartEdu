@@ -32,7 +32,8 @@ exports.checkUserRole = (roles) => {
         if (roles.includes(user.role)) {
             next();
         } else {
-            res.status(401).send("You can not do this");
+            req.flash("error", "You dont have permission for this");
+            res.status(401).redirect("/users/dashboard");
         }
     };
 };
