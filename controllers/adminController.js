@@ -4,12 +4,11 @@ const User = require("../models/userModel");
 exports.deleteUser = async (req, res, next) => {
     try {
         await User.findByIdAndDelete(req.params.userId);
-        Course.deleteMany({ teacher: req.params.userId }, async (err, data) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log(data);
-            }
+        Course.find({ teacher: req.params.userId }).then(async (data) => {
+            await Course.deleteMany({ teacher: req.params.userId });
+            data.forEach(async (course) => {
+                await User.updateMany({ courses: course._id }, { $pull: { courses: course._id } });
+            });
         });
         req.flash("success", `User has been deleted`);
         res.redirect("/users/dashboard");
