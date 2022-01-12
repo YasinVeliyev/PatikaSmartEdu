@@ -1,5 +1,6 @@
 const Course = require("../models/courseModel");
 const User = require("../models/userModel");
+const Category = require("../models/categoryModel");
 
 exports.deleteUser = async (req, res, next) => {
     try {
@@ -16,5 +17,22 @@ exports.deleteUser = async (req, res, next) => {
         console.log(error);
         req.flash("error", "Something get wrong Please try again");
         res.status(400).redirect(req.get("Referer"));
+    }
+};
+
+exports.getAdminDashboardPage = async (req, res, next) => {
+    try {
+        const courses = await User.findById(req.user._id);
+        let users = await User.find({});
+        let categories = await Category.find({});
+        return res.render("adminDashboard", {
+            page_name: "dashboard",
+            user: req.user,
+            categories,
+            users: users.filter((user) => user.role !== "Admin"),
+        });
+    } catch (error) {
+        console.log(error);
+        res.json({ status: "fail" });
     }
 };

@@ -3,7 +3,7 @@ const slugify = require("slugify");
 
 let courseSchema = new Schema({
     name: { type: String, required: true },
-    category: { type: String, required: true },
+    category: { type: Schema.Types.ObjectId, required: true, ref: "Category" },
     description: { type: String, required: true, trim: true },
     teacher: { type: Schema.Types.ObjectId, ref: "User" },
     students: [{ type: Schema.Types.ObjectId, ref: "User" }],
@@ -12,6 +12,7 @@ let courseSchema = new Schema({
 
 courseSchema.pre(/^find/, function (next) {
     this.populate("teacher");
+    this.populate("category");
     next();
 });
 

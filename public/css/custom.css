@@ -1,2 +1,51 @@
+.table {
+    height: 0;
+    display: none;
+    overflow-y: scroll;
+}
+caption {
+    margin-left: 10px;
+}
+thead {
+    position: sticky;
+    top: 0;
+}
 
-/** ADD YOUR AWESOME CODES HERE **/
+h2.dt::before {
+    content: "> ";
+}
+dt {
+    cursor: pointer;
+}
+
+.open {
+    animation: open 0.2s linear forwards;
+}
+
+.close0 {
+    animation: close0 0.2s linear forwards;
+}
+
+@keyframes open {
+    0% {
+        height: 0;
+    }
+    50% {
+        height: 200px;
+    }
+    100% {
+        height: 300px;
+    }
+}
+
+@keyframes close0 {
+    0% {
+        height: 300px;
+    }
+    50% {
+        height: 200px;
+    }
+    100% {
+        height: 0;
+    }
+}

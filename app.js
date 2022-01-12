@@ -11,6 +11,7 @@ const pageRouter = require("./routes/pageRouter");
 const courseRouter = require("./routes/courseRouter");
 const authRouter = require("./routes/authRouter");
 const adminRouter = require("./routes/adminRouter");
+const categoryRouter = require("./routes/categoryRouter");
 
 const middleware = require("./utils/middleware");
 
@@ -42,6 +43,8 @@ app.use(pageRouter);
 app.use("/courses", courseRouter);
 app.use("/users", authRouter);
 app.use("/admin", adminRouter);
+app.use("/categories", categoryRouter);
+
 mongoose
     .connect("mongodb://localhost:27017/smartedu")
     .then(

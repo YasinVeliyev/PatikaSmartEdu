@@ -3,6 +3,7 @@ const Course = require("../models/courseModel");
 const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 
+
 exports.createUser = async (req, res, next) => {
     const { username, email, firstname, lastname, password, confirmpassword, role } = req.body;
     const errors = validationResult(req);
@@ -41,14 +42,13 @@ exports.getDashboardPage = async (req, res, next) => {
     try {
         const courses = await User.findById(req.user._id);
         if (req.user.role == "Admin") {
-            users = await User.find({});
-            return res.render("adminDashboard", {
-                page_name: "dashboard",
-                user: req.user,
-                users: users.filter((user) => user.role !== "Admin"),
-            });
+            return res.redirect("/admin/dashboard");
         }
-        return res.render("dashboard", { page_name: "dashboard", user: req.user, courses: courses.courses });
+        return res.render("dashboard", {
+            page_name: "dashboard",
+            user: req.user,
+            courses: courses.courses,
+        });
     } catch (error) {
         console.log(error);
         res.json({ status: "fail" });
@@ -70,7 +70,8 @@ exports.getMyAllEnrolledCourses = async (req, res, next) => {
 exports.getMyAllTeaching = async (req, res, next) => {
     try {
         let courses = await Course.find({ teacher: req.user._id });
-        res.render("courses", { courses, page_name: "myteaching", user: req.user });
+        let categories = await Category.find({});
+        res.render("courses", { courses, page_name: "myteaching", user: req.user, categories });
     } catch (error) {
         console.log(error);
         res.status(400).json({

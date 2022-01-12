@@ -89,9 +89,9 @@
 									<div class="form-group">
 										<div class="col-sm-12">
 											<select class="form-control" name="category">
-												<option value="Programming">Programming</option>
-												<option value="Machine Learning">Machine Learning</option>
-												<option value="Deep Learning">Deep Learning</option>
+												<% for( let category of categories) { %>
+													<option value="<%= category._id %>"><%= category.name %></option>
+												<% } %>
 											</select>
 										</div>
 									</div>
@@ -145,6 +145,12 @@
 				<div class="col-lg-6 col-6 right-single">
 					<div class="widget-categories">
 						<h3 class="widget-title">Categories</h3>
+						<ul>
+							<% for( let category of categories) { %>
+								<li><a href="#" class='btn'><%= category.name %></a></li>
+							<% } %>
+						</ul>
+						
 					</div>
 				</div>
 			</div>
@@ -236,9 +242,9 @@
 											<div class="form-group">
 												<div class="col-sm-12">
 													<select class="form-control" name="category" value=<%= course.category%>>
-														<option value="Programming">Programming</option>
-														<option value="Machine Learning">Machine Learning</option>
-														<option value="Deep Learning">Deep Learning</option>
+														<% for( let category of categories) { %>
+															<option value="<%= category._id %>"><%= category.name %></option>
+														<% } %>
 													</select>
 												</div>
 											</div>

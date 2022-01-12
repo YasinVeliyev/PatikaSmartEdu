@@ -1,6 +1,6 @@
 const Course = require("../models/courseModel");
 const User = require("../models/userModel");
-const mongoose = require("mongoose");
+const Category = require("../models/categoryModel");
 
 exports.createCourse = async (req, res, next) => {
     const { name, description, category } = req.body;
@@ -28,7 +28,8 @@ exports.getAllCourse = async (req, res, next) => {
             filter.name = { $regex: pattern, $options: "si" };
         }
         let courses = await Course.find(filter);
-        res.render("courses", { courses, page_name: "courses", user: req.user });
+        let categories = await Category.find({});   
+        res.render("courses", { courses, page_name: "courses", user: req.user, categories });
     } catch (error) {
         console.log(error);
         res.status(400).json({
