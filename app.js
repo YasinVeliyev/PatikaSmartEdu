@@ -17,7 +17,7 @@ const middleware = require("./utils/middleware");
 
 const app = express();
 
-// app.use(morgan("Method::method, Url::url, Status Code::status, Response Time::response-time"));
+app.use(morgan("Method::method, Url::url, Status Code::status, Response Time::response-time"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
